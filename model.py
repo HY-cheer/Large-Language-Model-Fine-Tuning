@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Time   : 2025/5/9  
-# @Author : [YourName]
+# @Author : Hanhaoyue
 
 # 环境安装（先执行）
 # pip install torch==2.0.1+cu118 transformers==4.37.0 datasets==2.14.7 
@@ -24,7 +24,7 @@ MODEL_PATH = "Qwen/Qwen-7B-Chat"  # 使用HuggingFace官方模型[6](@ref)
 DATA_PATH = "./data/cord19_sample.json"  # 示例数据路径
 OUTPUT_DIR = "./qwen7b_finetuned"
 
-# QLoRA量化配置（网页7技术）
+# QLoRA量化配置
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
@@ -49,7 +49,7 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
 
-# LoRA参数配置（网页1+网页5优化）
+# LoRA参数配置
 lora_config = LoraConfig(
     r=8,
     lora_alpha=32,
